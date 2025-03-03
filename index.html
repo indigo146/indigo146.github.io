@@ -12,9 +12,9 @@
             <div class="logo">NeXt <span>Radio</span> <span class="slogan">The sound of now</span></div>
             <div class="menu-links">
                 <a href="#home">Home</a>
-                <a href="#requests">Requests</a>
-                <a href="#recently-played">Recently Played</a>
+                <a onclick="openPlayer()" href="#">Listen</a>
                 <a href="#schedule">Schedule</a>
+                <a href="#requests">Requests</a>
             </div>
         </nav>
 
@@ -33,6 +33,7 @@
                 </div>
                 <button class="listen-live-btn" onclick="openPlayer()">🎵 Listen Live</button>
             </div>
+            
             <div class="recently-played section">
                 <h2>Recently Played</h2>
                 <iframe
@@ -74,6 +75,7 @@
         <div id="footer" class="section">
             <h3>Next Radio</h3>
         </div>
+        
         <script src="Script.js" type="text/javascript"></script>
     </body>
 </html>
