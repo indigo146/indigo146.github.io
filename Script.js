@@ -1,64 +1,53 @@
 async function fetchNowPlaying() {
-                try {
-                    const response = await fetch(
-                        "https://azuracast34031.hostkey.in/api/nowplaying_static/nextradiouk.json"
-                    );
-                    const data = await response.json();
+    try {
+        const [scheduleResponse, nowPlayingResponse] = await Promise.all([
+            fetch("https://azuracast34031.hostkey.in/api/station/2/schedule"),
+            fetch("https://azuracast34031.hostkey.in/api/nowplaying/2")
+        ]);
 
-                    // Set Now Playing
-                    document.getElementById("current-song").innerText =
-                        data.now_playing.song.title + " - " + data.now_playing.song.artist;
-                    document.getElementById("album-art").src = data.now_playing.song.art;
+        const scheduleData = await scheduleResponse.json();
+        const nowPlayingData = await nowPlayingResponse.json();
 
-                    // Set Playing Soon
-                    document.getElementById("playing-soon").innerText =
-                        "Playing Next: " + data.playing_next.song.artist;
-                } catch (error) {
-                    console.error("Error fetching now playing data:", error);
-                }
+        const now = Math.floor(Date.now() / 1000);
+        let currentShow = "The Sound of Now!";
+
+        scheduleData.forEach((schedule) => {
+            if (now >= schedule.start_timestamp && now <= schedule.end_timestamp) {
+                currentShow = schedule.name;
             }
+        });
 
-            setInterval(fetchNowPlaying, 10000);
-            window.onload = fetchNowPlaying;
-            function openPlayer() {
-                window.open(
-                    "https://azuracast34031.hostkey.in/public/nextradiouk",
-                    "_blank",
-                    "width=600,height=400,noopener,noreferrer"
-                );
-            }
-            async function fetchNowPlaying() {
-                try {
-                    const [scheduleResponse, nowPlayingResponse] = await Promise.all([
-                        fetch("https://azuracast34031.hostkey.in/api/station/2/schedule"),
-                        fetch("https://azuracast34031.hostkey.in/api/nowplaying/2")
-                    ]);
+        if (nowPlayingData.live.is_live && nowPlayingData.live.streamer_name) {
+            currentShow = nowPlayingData.live.streamer_name;
+        }
 
-                    const scheduleData = await scheduleResponse.json();
-                    const nowPlayingData = await nowPlayingResponse.json();
+        document.getElementById("current-show").innerHTML = `On Air: <span>${currentShow}</span>`;
 
-                    const now = Math.floor(Date.now() / 1000); // Current timestamp in seconds
-                    let currentShow = "The Sound of Now!";
+        if (nowPlayingData.now_playing.song) {
+            document.getElementById("current-song").innerText =
+                nowPlayingData.now_playing.song.title + " - " + nowPlayingData.now_playing.song.artist;
+            document.getElementById("album-art").src = nowPlayingData.now_playing.song.art;
+        }
 
-                    scheduleData.forEach((schedule) => {
-                        const startTime = schedule.start_timestamp;
-                        const endTime = schedule.end_timestamp;
-                        const showName = schedule.name;
-                        if (now >= startTime && now <= endTime) {
-                            currentShow = showName;
-                        }
-                    });
+        if (nowPlayingData.playing_next && nowPlayingData.playing_next.song) {
+            document.getElementById("playing-soon").innerText =
+                "Playing Next: " + nowPlayingData.playing_next.song.artist;
+        } else {
+            document.getElementById("playing-soon").innerText = "Playing Next: Unknown";
+        }
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        document.getElementById("current-show").innerHTML = "Error loading schedule.";
+    }
+}
 
-                    if (nowPlayingData.live.is_live && nowPlayingData.live.streamer_name) {
-                        currentShow = nowPlayingData.live.streamer_name;
-                    }
+fetchNowPlaying();
+setInterval(fetchNowPlaying, 30000);
 
-                    document.getElementById("current-show").innerHTML = `On Air: <span>${currentShow}</span>`;
-                } catch (error) {
-                    console.error("Error fetching data:", error);
-                    document.getElementById("current-show").innerHTML = "Error loading schedule.";
-                }
-            }
-
-            fetchNowPlaying();
-            setInterval(fetchNowPlaying, 30000); // Refresh every 30 seconds
+function openPlayer() {
+    window.open(
+        "https://azuracast34031.hostkey.in/public/nextradiouk",
+        "_blank",
+        "width=600,height=400,noopener,noreferrer"
+    );
+}
