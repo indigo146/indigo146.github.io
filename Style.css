@@ -1,0 +1,308 @@
+body {
+    background: url("https://i.postimg.cc/G3TThcBG/Purple-Pink-Light-Illustration.jpg") no-repeat center center fixed;
+    background-size: cover;
+    backdrop-filter: blur(10px);
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: white;
+    animation: moveBackground 60s infinite linear alternate;
+}
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(15px);
+    z-index: -1;
+}
+@keyframes moveBackground {
+    0% {
+        background-position: center center;
+    }
+    25% {
+        background-position: 55% 45%;
+    }
+    50% {
+        background-position: 50% 55%;
+    }
+    75% {
+        background-position: 45% 50%;
+    }
+    100% {
+        background-position: center center;
+    }
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 40px;
+    font-weight: 300;
+}
+.logo span {
+    font-weight: 600;
+}
+
+.slogan {
+    font-size: 20px;
+    font-weight: 100 !important;
+    margin-left: 3px;
+    opacity: 0.8;
+}
+
+.menu-links {
+    display: flex;
+    gap: 20px;
+}
+
+.menu-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.menu-links a:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.section {
+    padding: 10px 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(15px);
+    position: relative;
+    margin: 20px;
+}
+.now-playing-info {
+    padding: 10px;
+    background: rgba(255, 0, 0, 0.5);
+    border-radius: 50px;
+    backdrop-filter: blur(20px);
+    position: relative;
+    margin: auto;
+}
+
+.section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("https://www.transparenttextures.com/patterns/noise-pattern.png");
+    opacity: 0.2;
+    border-radius: 10px;
+}
+
+.section h2 {
+    font-weight: 600;
+    font-size: 70px;
+    margin: 5px 0; /* Further reduced space above and below */
+    padding-top: 0; /* Ensure no extra padding at the top */
+    padding-bottom: 10px;
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+    }
+}
+
+.now-playing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    width: 50%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(15px);
+    animation: pulseGlow 4s infinite ease-in-out;
+}
+.now-playing img {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.now-playing p {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.listen-live-btn {
+    background: #ff004c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 25px;
+    margin-top: 35px;
+    display: inline-block;
+    z-index: 1000;
+    position: relative;
+    transition:
+        transform 0.2s ease-in-out,
+        background 0.3s;
+}
+
+.listen-live-btn:hover {
+    background: #d4003a;
+    font-weight: 600;
+    transform: scale(1.05);
+}
+
+.recently-played {
+    width: 65%;
+}
+
+.now-playing-info {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.15); /* Slightly less opacity */
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center; /* Align items horizontally */
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 90%;
+    max-width: 400px;
+}
+
+.now-playing-info img {
+    width: 140px;
+    height: 140px;
+    border-radius: 10px;
+    margin-right: 15px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Subtle drop shadow */
+}
+
+.now-playing-text {
+    text-align: left;
+    flex-grow: 1;
+}
+
+#current-show {
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+#current-show span {
+    font-weight: 300; /* Lighter weight for the show name */
+}
+
+.now-playing-info {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.15); /* Slightly less opacity */
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Subtle drop shadow */
+}
+
+.now-playing-info img {
+    width: 140px;
+    height: 140px;
+    border-radius: 10px;
+    margin-right: 15px;
+    margin-bottom: auto;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Subtle drop shadow */
+}
+
+.now-playing-text {
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center text */
+    transform: translateY(-20px); /* Move text up by 20px */
+}
+
+.now-playing-text p:first-child {
+    font-size: 25px; /* Increase text size */
+    font-weight: 600; /* Make it bolder */
+    margin-bottom: 5px;
+}
+
+#current-show {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+#current-show span {
+    font-weight: 300; /* Lighter weight for the show name */
+}
+.playing-soon-info {
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+    width: 100%;
+    max-width: 415px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.playing-soon-text {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+.playing-soon-text p {
+    font-size: 18px;
+    font-weight: 100;
+    margin: 5px 0;
+}
+iframe {
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+}
