@@ -1,5 +1,4 @@
-        <script>
-            async function fetchNowPlaying() {
+async function fetchNowPlaying() {
                 try {
                     const response = await fetch(
                         "https://azuracast34031.hostkey.in/api/nowplaying_static/nextradiouk.json"
@@ -63,4 +62,3 @@
 
             fetchNowPlaying();
             setInterval(fetchNowPlaying, 30000); // Refresh every 30 seconds
-        </script>
