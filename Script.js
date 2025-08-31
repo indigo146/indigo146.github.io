@@ -1,8 +1,8 @@
 async function fetchNowPlaying() {
     try {
         const [scheduleResponse, nowPlayingResponse] = await Promise.all([
-            fetch("https://azuracast34031.hostkey.in/api/station/2/schedule"),
-            fetch("https://azuracast34031.hostkey.in/api/nowplaying/2")
+            fetch("https://onair.nextradio.uk/api/station/2/schedule"),
+            fetch("https://onair.nextradio.uk/api/nowplaying/2")
         ]);
 
         const scheduleData = await scheduleResponse.json();
@@ -46,7 +46,7 @@ setInterval(fetchNowPlaying, 30000);
 
 function openPlayer() {
     window.open(
-        "https://azuracast34031.hostkey.in/public/nextradiouk",
+        "https://onair.nextradio.uk/public/nextradiouk",
         "_blank",
         "width=600,height=400,noopener,noreferrer"
     );
